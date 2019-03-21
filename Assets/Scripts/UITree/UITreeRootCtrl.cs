@@ -37,6 +37,9 @@ public class UITreeRootCtrl : MonoBehaviour
     [SerializeField]
     public UITreeRootData selfData = new UITreeRootData();
 
+    public event Action OnInitAllNodesHandler;
+
+
     private void Awake()
     {
         TestDeseralizeItemNodes();
@@ -126,7 +129,8 @@ public class UITreeRootCtrl : MonoBehaviour
 
 
         //这里进行初始化//实例化足够的View元素并刷新其显示
-        selfData.InitNodes(this);
+        //selfData.InitNodes(this);
+        InitNodes();
     }
 
 
@@ -199,9 +203,48 @@ public class UITreeRootCtrl : MonoBehaviour
 
     public void OnNodesFoldOrUnFold()
     {
-        selfData.InitNodes(this);
+        InitNodes();
+        //selfData.InitNodes(this);
     }
 
+
+    /// <summary>初始化节点//节点index//节点View</summary>
+    /// <param name="uITreeRootCtrl"></param>
+    public void InitNodes()
+    {
+        NZQLA.Log.LogAtUnityEditorNormal("Init Root Nodes");
+        int indexHor = 0, indexVer = 0;
+
+        for (int i = 0; i < selfData.m_children.Count; i++)
+        {
+            if (selfData.m_children[i] != null)
+            {
+                indexHor = 0;
+                selfData.m_children[i].InitNodeIndex(ref indexHor, ref indexVer, true);
+                selfData.m_children[i].InitNode(this);
+            }
+        }
+
+        OnInitAllNodes();
+    }
+
+    public void OnInitAllNodes()
+    {
+        HandleTreeViewContentPanelSize();
+
+        if (OnInitAllNodesHandler != null)
+        {
+            OnInitAllNodesHandler();
+        }
+    }
+
+    private void HandleTreeViewContentPanelSize()
+    {
+        int nodeShowCount = CaclulateCellsCountShow();
+        Vector2 vSize = SelfView.selfContent.sizeDelta;
+        vSize.y = (selfData.m_cellSize.y + selfData.m_cellOffsetHorizontal) * nodeShowCount;
+        SelfView.selfContent.sizeDelta = vSize;
+    }
 
 }
 
@@ -230,38 +273,38 @@ public class UITreeRootData
     public Vector2 m_cellSize;
 
 
-    /// <summary>初始化节点//节点index//节点View</summary>
-    /// <param name="uITreeRootCtrl"></param>
-    public void InitNodes(UITreeRootCtrl uITreeRootCtrl)
-    {
-        NZQLA.Log.LogAtUnityEditorNormal("Init Root Nodes");
-        int indexHor = 0, indexVer = 0;
+    ///// <summary>初始化节点//节点index//节点View</summary>
+    ///// <param name="uITreeRootCtrl"></param>
+    //public void InitNodes(UITreeRootCtrl uITreeRootCtrl)
+    //{
+    //    NZQLA.Log.LogAtUnityEditorNormal("Init Root Nodes");
+    //    int indexHor = 0, indexVer = 0;
 
-        for (int i = 0; i < m_children.Count; i++)
-        {
-            if (m_children[i] != null)
-            {
-                indexHor = 0;
-                m_children[i].InitNodeIndex(ref indexHor, ref indexVer, true);
-                m_children[i].InitNode(uITreeRootCtrl);
-            }
-        }
-    }
+    //    for (int i = 0; i < m_children.Count; i++)
+    //    {
+    //        if (m_children[i] != null)
+    //        {
+    //            indexHor = 0;
+    //            m_children[i].InitNodeIndex(ref indexHor, ref indexVer, true);
+    //            m_children[i].InitNode(uITreeRootCtrl);
+    //        }
+    //    }
+    //}
 
-    public void InitNodesIndex()
-    {
-        if (m_children.isNull())
-        {
-            //TODO
-            return;
-        }
+    //public void InitNodesIndex()
+    //{
+    //    if (m_children.isNull())
+    //    {
+    //        //TODO
+    //        return;
+    //    }
 
-        int indexHor = 0, indexVer = 0;
-        for (int i = 0; i < m_children.Count; i++)
-        {
-            m_children[i].InitNodeIndex(ref indexHor, ref indexVer, true);
-        }
-    }
+    //    int indexHor = 0, indexVer = 0;
+    //    for (int i = 0; i < m_children.Count; i++)
+    //    {
+    //        m_children[i].InitNodeIndex(ref indexHor, ref indexVer, true);
+    //    }
+    //}
 
 
     public void SetNodesData(List<UITreeItemNode> children)

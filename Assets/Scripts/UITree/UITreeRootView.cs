@@ -9,6 +9,9 @@ public class UITreeRootView : MonoBehaviour
 {
     public RectTransform selfRect;
 
+    public RectTransform selfContent;
+
+
     public ScrollRect UITreeContentScrollView;
 
     //public List<UITreeCellView> m_AllCellsView;

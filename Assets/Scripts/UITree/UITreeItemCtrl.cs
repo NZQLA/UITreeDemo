@@ -189,7 +189,7 @@ public class UITreeItemNode
     public int GetCellCountShow()
     {
         int count = 1;
-        if (!HavChild())
+        if (!HavChild()||m_data.m_openState != UITreeCellOpenState.Open)
         {
             return count;
         }
