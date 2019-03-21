@@ -72,6 +72,7 @@ public class UITreeItemCtrl
 
         if (selfData == null || !selfData.HavChild())
         {
+            NZQLA.Log.LogAtUnityEditorNormal("无法展开");
             //无法展开
             return;
         }
@@ -170,6 +171,13 @@ public class UITreeItemNode
 
     [HideInInspector]
     public string m_selfID;
+
+
+    public UITreeItemNode()
+    {
+        m_data = new UITreeItemData();
+    }
+
 
     public bool HavChild()
     {

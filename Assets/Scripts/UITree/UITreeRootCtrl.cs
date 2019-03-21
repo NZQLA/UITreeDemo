@@ -24,16 +24,18 @@ public class UITreeRootCtrl : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private string strSeralizeFilePath = "NodesSeralizeData.json";
 
     [SerializeField]
     [Tooltip("元素的预制体")]
     private UITreeNodeView UITreeCellViewPrefab;
 
     [SerializeField]
-    private UITreeRootView SelfView;
+    public UITreeRootView SelfView;
 
     [SerializeField]
-    private UITreeRootData selfData = new UITreeRootData();
+    public UITreeRootData selfData = new UITreeRootData();
 
     private void Awake()
     {
@@ -55,7 +57,8 @@ public class UITreeRootCtrl : MonoBehaviour
     {
         Vector3 vPosTest = Vector3.zero;
         vPosTest.y -= selfData.m_cellSize.y * m_indexVer;
-        vPosTest.x += selfData.m_cellOffsetHorizontal * m_indexHor;
+        vPosTest.y -= selfData.m_cellOffsetHorizontal * (m_indexVer);
+        vPosTest.x += selfData.m_cellRetract * m_indexHor;
         return vPosTest;
     }
 
@@ -75,7 +78,7 @@ public class UITreeRootCtrl : MonoBehaviour
 
     string GetSerailizeFilePath()
     {
-        return Application.streamingAssetsPath + "/" + "NodesSeralizeData.json";
+        return System.IO.Path.Combine(Application.streamingAssetsPath, strSeralizeFilePath);
     }
 
 
@@ -88,9 +91,6 @@ public class UITreeRootCtrl : MonoBehaviour
         var dataDeseralize = JsonMapper.ToObject<Dictionary<string, UITreeItemSerlizeData>>(new JsonReader(strSerailzeData));
         selfData.m_children = UITreeExtension.DeSerializeUtemsFromSerializeData(dataDeseralize);
     }
-
-
-    //public UITreeCellView GetNext
 
 
     public void RefreshView()
@@ -263,5 +263,10 @@ public class UITreeRootData
         }
     }
 
+
+    public void SetNodesData(List<UITreeItemNode> children)
+    {
+        this.m_children = children;
+    }
 
 }

@@ -74,7 +74,12 @@ public class UITreeNodeView : MonoBehaviour, IMonoPoolItemRecycle<UITreeNodeView
 
         if (UITextCellName != null)
         {
-            UITextCellName.text = selfCtrl.selfData.m_data.m_cellName;
+
+            //TEST
+            UITextCellName.text = string.Format("ID:{0}", selfCtrl.selfData.m_selfID);
+
+
+            //UITextCellName.text = selfCtrl.selfData.m_data.m_cellName;
             //Temp
             if (!selfRect.gameObject.activeSelf)
             {

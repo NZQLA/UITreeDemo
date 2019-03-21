@@ -15,7 +15,7 @@ public static class UITreeExtension
     public const string ItemIDConnectChar = "-";
 
 
-    public static void InitNodeIndex(this UITreeItemNode self,ref int indexHor,ref int indexVer,bool bInitChildrenAlso = true)
+    public static void InitNodeIndex(this UITreeItemNode self, ref int indexHor, ref int indexVer, bool bInitChildrenAlso = true)
     {
         if (self == null)
         {
@@ -75,7 +75,7 @@ public static class UITreeExtension
         self.m_ctrl.Init(rootCtrl);
 
         //处理子节点(隐藏节点不考虑)
-        if (self.HavChild() && bInitChildrenAlso&&self.m_data.m_openState == UITreeCellOpenState.Open)
+        if (self.HavChild() && bInitChildrenAlso && self.m_data.m_openState == UITreeCellOpenState.Open)
         {
             for (int i = 0; i < self.m_children.Count; i++)
             {
@@ -150,9 +150,12 @@ public static class UITreeExtension
         }
 
         //递归处理子节点
-        for (int i = 0; i < self.m_children.Count; i++)
+        if (self.HavChild())
         {
-            StatisticsItemsSerializeDataAtNodesData(self.m_children[i], sbTemp.ToString(), ref dicSerializeData);
+            for (int i = 0; i < self.m_children.Count; i++)
+            {
+                StatisticsItemsSerializeDataAtNodesData(self.m_children[i], sbTemp.ToString(), ref dicSerializeData);
+            }
         }
     }
 
@@ -226,7 +229,7 @@ public static class UITreeExtension
                 tempNode.m_selfID = dicItemsSeralizeDataIE.Current.Value.m_selfID;
 
 
-                if (dicItemsSeralizeDataIE.Current.Value.m_data.m_isRoot)
+                if (dicItemsSeralizeDataIE.Current.Value.m_data.m_isRoot || string.IsNullOrEmpty(dicItemsSeralizeDataIE.Current.Value.m_parentID))
                 {
                     //rootNodesIDList.Add(dicItemsSeralizeDataIE.Current.Key);
                     rootNodesList.Add(tempNode);
