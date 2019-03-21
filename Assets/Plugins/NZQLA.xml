@@ -1,0 +1,2075 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NZQLA</name>
+    </assembly>
+    <members>
+        <member name="T:CompareBase">
+            <summary>
+            用于保存一些常用的数据类型的大小比较
+            </summary>
+        </member>
+        <member name="T:Range`1">
+            <summary>范围</summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:AirPlaneFly">
+            <summary>
+            模拟战机飞行
+            W/'↑' 向前飞行 ;  S/'↓' 减速
+            A/'←' 向左翻转 向左转弯
+            D/'→' 向右翻转 向右转弯
+            Q      爬升
+            E       俯冲
+            F/"Fire1" 攻击
+            </summary>
+        </member>
+        <member name="T:Flyer">
+            <summary>
+            W,S前/后移动
+            A,D向左/右移动
+            右键按下时依据数据的上下左右偏移修改前方朝向
+            </summary>
+        </member>
+        <member name="T:NZQLA.CollectionHelper">
+            <summary>
+            提供一些关于Collection(T[]、List)方便使用的接口/外调方法
+            </summary>
+        </member>
+        <member name="M:NZQLA.CollectionHelper.CreateArray1``1(System.Int32,``0)">
+            <summary>创建一个指定长度的指定类型的一维数组，并使用指定值初始化所有元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="len"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.CollectionHelper.CreateArray2``1(System.Int32,System.Int32,``0)">
+            <summary>创建一个指定尺寸的指定类型的二维数组，并使用指定值初始化所有元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="height">行的数量</param>
+            <param name="width">行内元素数量</param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.CollectionHelper.CreateList``1(System.Int32,``0)">
+            <summary>创建一个指定长度的指定类型的List，并使用指定值初始化所有元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="count">元素数量</param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.EnumOperate">
+            <summary>
+            枚举操作
+            </summary>
+        </member>
+        <member name="M:NZQLA.EnumOperate.GetEnumNameByValue``1(``0)">
+            <summary>获取指定枚举对应的名称</summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">枚举的值</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.GameObjectHelper">
+            <summary>用于处理[GameObject]周边</summary>
+        </member>
+        <member name="M:NZQLA.GameObjectHelper.FindObjByName(System.String)">
+            <summary>查找指定名称的GameObject</summary>
+            <param name="strName">指定名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.GameObjectHelper.EnsureHasComponent``1(UnityEngine.GameObject)">
+            <summary>确保对象挂载有指定组件</summary>
+            <typeparam name="T">指定组件类型</typeparam>
+            <param name="obj">指定对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.GameObjectHelper.FindChildOnSelf(UnityEngine.Transform,System.String,System.Boolean)">
+            <summary>查找指定对象的子物体</summary>
+            <param name="self"></param>
+            <param name="strChildName">指定子物体的名称</param>
+            <param name="OnlyFindInTopChildren">只在第一层的子物体内查找</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.FollowTarget">
+            <summary>
+            跟随目标
+            </summary>
+        </member>
+        <member name="F:NZQLA.FollowTarget.target">
+            <summary>跟随目标</summary>
+        </member>
+        <member name="F:NZQLA.FollowTarget.vOffsetPos">
+            <summary>与目标的相对偏移距离</summary>
+        </member>
+        <member name="M:NZQLA.FollowTarget.ActionFollowTarget(UnityEngine.Transform,UnityEngine.Vector3)">
+            <summary>开始追随指定目标</summary>
+            <param name="target">指定目标</param>
+            <param name="vOffsetPos">与目标的相对位置</param>
+        </member>
+        <member name="M:NZQLA.FollowTarget.PauseFollow">
+            <summary>暂停跟随</summary>
+        </member>
+        <member name="M:NZQLA.FollowTarget.ContinueFollow">
+            <summary>继续追随</summary>
+        </member>
+        <member name="M:NZQLA.FollowTarget.StopFollow">
+            <summary>终止追随</summary>
+        </member>
+        <member name="T:NZQLA.AniPlayCtrl">
+            <summary>
+            用于控制跨Animation的动画播放
+            </summary>
+        </member>
+        <member name="F:NZQLA.AniPlayCtrl.Ins">
+            <summary>实例</summary>
+        </member>
+        <member name="F:NZQLA.AniPlayCtrl.arrAni">
+            <summary>Animation组件</summary>
+        </member>
+        <member name="F:NZQLA.AniPlayCtrl.strAniNamePlay">
+            <summary>制定本需要播放的动画剪辑名称</summary>
+        </member>
+        <member name="F:NZQLA.AniPlayCtrl.bPlayInverse">
+            <summary>逆向播放动画</summary>
+        </member>
+        <member name="M:NZQLA.AniPlayCtrl.ActionPlayAni(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            外调：播放指定的动画
+            </summary>
+            <param name="strAniClipName">指定想要播放的动画</param>
+            <param name="_PlayInverse">是否是逆向播放</param>
+            <param name="bAllowBusy">动画播放：繁忙中 是否允许强制播放</param>
+        </member>
+        <member name="T:NZQLA.ExtendFunctionCSharp">
+            <summary>
+            扩展方法
+            </summary>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetItem``2(System.Collections.Generic.Dictionary{``0,``1},``0)">
+            <summary>获取词典中指定索引的元素</summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dic">词典</param>
+            <param name="key">指定索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isNull``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>判定词典是否为空    元素数量为0视为空</summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.AddItem``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            为词典添加元素
+            </summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="dic"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItem``2(System.Collections.Generic.Dictionary{``0,``1},System.Action{``1}[])">
+            <summary>
+            遍历词典 并将每一个元素作为参数 传入并执行指定Action
+            </summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dic"></param>
+            <param name="action">指定Action</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.CreateFromArray``2(System.Collections.Generic.Dictionary{``0,``1},``1[],System.Func{``1,``0},System.Boolean,System.Boolean)">
+            <summary>由数组初始化本词典</summary>
+            <typeparam name="K">类型：键</typeparam>
+            <typeparam name="V">类型：值</typeparam>
+            <param name="dic"></param>
+            <param name="arr">资源数组</param>
+            <param name="GetValueKeyFunc">用于获取数组元素键的委托</param>
+            <param name="bCoverWhenHavSameKey">是否覆盖当有重复键的时候</param>
+            <param name="bClearDicBeforeCreate">初始化时是否清空自身元素</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ToString``2(System.Collections.Generic.Dictionary{``0,``1},System.String,System.String)">
+             <summary>
+             将List转为字符串
+             </summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+             <param name="dic">List</param>
+             <param name="strIndexConnectValue">连接元素索引和元素值的字符串</param>
+             <param name="strConnectItem">元素间的连接字符串</param>
+             <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetItem``1(``0[],System.Int32)">
+            <summary>获取数组中指定索引的元素</summary>
+            <typeparam name="T">数组元素类型</typeparam>
+            <param name="arr">数组</param>
+            <param name="Index">指定索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isNull``1(``0[])">
+            <summary>判定数组书否为空数组     元素数量为0视为空</summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isNull``1(``0[0:,0:])">
+            <summary>判定一个二维数组是否为空</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.Init``1(``0[],``0)">
+            <summary>使用指定值初始化一维数组的元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="defaultValue"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.Init``1(``0[0:,0:],``0)">
+            <summary>使用指定值初始化二维数组的元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="defaultValue"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItem``1(``0[],System.Action{``0}[])">
+            <summary>
+            遍历数组 对元素执行指定的Action
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="arr"></param>
+            <param name="action">Action</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItem``1(``0[0:,0:],System.Action{``0}[])">
+            <summary>遍历二维数组 对元素执行指定的Action</summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItemIndex``1(``0[],System.Action{``0,System.Int32}[])">
+            <summary>
+            遍历数组 对元素执行指定的Action
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="arr"></param>
+            <param name="action">Action</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetRandItem``1(``0[])">
+            <summary>
+            随机获取一个元素
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="arr">数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetRandIndex``1(``0[])">
+            <summary>
+            获取一个随机有效的元素索引
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ToOneString``1(``0[],System.String,System.String)">
+            <summary>
+            将数组转为字符串
+            </summary>
+            <typeparam name="T">数组元素类型</typeparam>
+            <param name="arr">数组</param>
+            <param name="strIndexConnectValue">连接元素索引和元素值的字符串</param>
+            <param name="strConnectItem">元素间的连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ToOneString``1(``0[0:,0:],System.String,System.String,System.String)">
+            <summary>将二维数组转成一个厂字符串</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="strIndexConnectValue"></param>
+            <param name="strConnectItem">元素连接符</param>
+            <param name="strLine">换行符</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isIndexLawful``1(``0[],System.Int32)">
+            <summary>判定索引是否合法</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isIndexLawful``1(``0[0:,0:],System.Int32,System.Int32)">
+            <summary>判定索引是否合法</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="hor">第几列</param>
+            <param name="ver">第几行</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.CopyFree``1(``0[],System.Int32,System.Int32,System.Boolean)">
+            <summary>Copy数组 从起始位置拷贝指定数量的元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="indexStart"></param>
+            <param name="count"></param>
+            <param name="bCopyMax">true 如果元素不够,Copy剩余的所有元素 ,反之放弃Copy</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetItem``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>获取List中指定索引的元素</summary>
+            <typeparam name="T">List元素类型</typeparam>
+            <param name="list">List</param>
+            <param name="Index">指定索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isNull``1(System.Collections.Generic.List{``0})">
+            <summary>判定List是否为空     元素数量为0视为空</summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.Init``1(System.Collections.Generic.List{``0},``0)">
+            <summary>使用指定值初始化List的元素</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="defaultValue"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItem``1(System.Collections.Generic.List{``0},System.Action{``0}[])">
+            <summary>
+            遍历List 对元素执行指定的Action
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="list"></param>
+            <param name="action">Action</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionAtItemIndex``1(System.Collections.Generic.List{``0},System.Action{``0,System.Int32}[])">
+            <summary>
+            遍历List 对元素执行指定的Action
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="list"></param>
+            <param name="action">Action</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetRandItem``1(System.Collections.Generic.List{``0})">
+            <summary>
+            随机获取一个元素
+            </summary>
+            <typeparam name="T">元素类型</typeparam>
+            <param name="list">List</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.isIndexLawful``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>判定索引是否合法</summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ToOneString``1(System.Collections.Generic.List{``0},System.String,System.String)">
+            <summary>
+            将List转为字符串
+            </summary>
+            <typeparam name="T">List元素类型</typeparam>
+            <param name="list">List</param>
+            <param name="strIndexConnectValue">连接元素索引和元素值的字符串</param>
+            <param name="strConnectItem">元素间的连接字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.WriteToFile(System.String,System.String,System.Boolean)">
+            <summary>
+            写入文件
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="strPath">路径</param>
+            <param name="bAppend">追加模式</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.RandItemRank``1(``0[])">
+            <summary>
+            打乱数组内的元素顺
+            </summary>
+            <typeparam name="T">数组元素类型</typeparam>
+            <param name="arr"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.ActionInvokeSafely(System.Action)">
+            <summary>
+            调用Action 调用之预判其是否为空
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.GetValueFromInt10UnEqual0(System.Int32,System.Boolean)">
+            <summary>
+            位运算 取出所有为1的位
+            </summary>
+            <param name="value">十进制数值</param>
+            <param name="bIndex">将返回值替换为索引位数而不是值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.DeepCopyByXML``1(``0)">
+            <summary>
+            深层拷贝(XML) 前提是目标类型(含内部数据类型)支持需要序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionCSharp.DeepCopyByBinary``1(``0)">
+            <summary>
+            深层拷贝(二进制)  前提是目标类型(含内部数据类型)支持需要序列化 引用类型需要加上[Serializable]
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.ExtendFunctionUnity">
+            <summary>
+            Unity的扩展方法
+            </summary>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.Reset(UnityEngine.Transform)">
+            <summary>重置</summary>
+            <param name="self"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.Copy(UnityEngine.Transform,UnityEngine.Transform,System.Boolean)">
+            <summary>复制Transform</summary>
+            <param name="self"></param>
+            <param name="target">目标</param>
+            <param name="bLocal">拷贝Local？</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.EnsureHasComponent``1(UnityEngine.GameObject)">
+            <summary>确保自身挂在指定类型的脚本组件(对象必须是激活状态)</summary>
+            <typeparam name="T">指定脚本组件的类型</typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.RelativePos(UnityEngine.Transform,UnityEngine.Vector3)">
+            <summary>获取自身的相对位置的世界位置</summary>
+            <param name="self"></param>
+            <param name="offset">相对偏移位置</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.RelativePos(UnityEngine.Transform,System.Single,UnityEngine.Vector3)">
+            <summary>获取相对于自身指定方向指定距离的世界位置</summary>
+            <param name="self"></param>
+            <param name="fDis">指定距离</param>
+            <param name="vDirOffset">指定方向(不需要将其转为LocalSpace 比如正前方可以直接用Vector3.forward)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetContent(UnityEngine.UI.Text,System.String)">
+            <summary>设置Text文本内容</summary>
+            <param name="self"></param>
+            <param name="strContent">指定文本内容</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetPosByScale(UnityEngine.RectTransform,UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>根据父物体的面板大小和自身所处父物体面板区域内的比例处绘制Image</summary>
+            <param name="selfPanel"></param>
+            <param name="vScale">自身所处父物体面板区域内的比例</param>
+            <param name="vStandardPosScale"></param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetSize(UnityEngine.RectTransform,UnityEngine.Vector2)">
+            <summary>设置UI为指定尺寸</summary>
+            <param name="RTS"></param>
+            <param name="vSize">指定尺寸</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetSizeByScale(UnityEngine.RectTransform,UnityEngine.Vector2,UnityEngine.Vector2,System.Boolean)">
+            <summary>设置UI为父物体UI区域的中心区域的指定比例大小 </summary>
+            <param name="RTS"></param>
+            <param name="vScaleHor">水平比例(比如(0,1)就表示宽度与父物体一样大)</param>
+            <param name="vScaleVer">垂直比例</param>
+            <param name="bStayBefore">是否维持原有大小和位置</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetSizeByAnchor(UnityEngine.RectTransform,UnityEngine.Vector2,UnityEngine.Vector2,System.Boolean)">
+            <summary>设置UI相对于父级的锚点</summary>
+            <param name="RTS"></param>
+            <param name="vAnchorMin">极小锚点(ScaleMinX,ScaleMinY)</param>
+            <param name="vAnchorMax">极大锚点(ScaleMaxX,ScaleMaxY)</param>
+            <param name="bStayBefore">是否维持原有大小和位置</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.SetRectByAnchor(UnityEngine.RectTransform,System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean)">
+             <summary>设置UI相对于父级的锚点</summary>
+             <param name="RTS"></param>
+             <param name="fStartHor"></param>
+             <param name="fAreaHor"></param>
+             <param name="fStartVer"></param>
+             <param name="fAreaVer"></param>
+            <param name="bClamp01"></param>
+             <param name="bStartAsCenter"></param>
+             <param name="bStayBefore">是否维持原有大小和位置</param>
+        </member>
+        <member name="M:NZQLA.ExtendFunctionUnity.ContainsLayer(UnityEngine.LayerMask,System.Int32)">
+            <summary>判定是否包含指定层</summary>
+            <param name="self"></param>
+            <param name="Layer">指定层的Int值</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.SafeDictionary`2">
+            <summary>安全获取的 Dictionary</summary>
+            <typeparam name="TKey">键的类型</typeparam>
+            <typeparam name="TValue">值的类型</typeparam>
+        </member>
+        <member name="P:NZQLA.SafeDictionary`2.Item(`0)">
+            <summary>安全的索引器 get失败,返回默认值；set失败,自动添加</summary>
+            <param name="key">key</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.AutoNewDictionary`2">
+            <summary>自动添加元素的Dictionary</summary>
+            <typeparam name="TKey">键的类型</typeparam>
+            <typeparam name="TValue">值的类型</typeparam>
+        </member>
+        <member name="P:NZQLA.AutoNewDictionary`2.Item(`0)">
+            <summary>安全的索引器 get失败,返回自动New()并添加；set失败,自动添加</summary>
+            <param name="key">key</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.FileTool">
+            <summary>
+            文件操作
+            </summary>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFileSystemInfo(System.String)">
+            <summary>尝试获取从指定路径FileSystemInfo</summary>
+            <param name="strPathFull"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFileinfosAtDirectory(System.String,System.IO.SearchOption,System.String[])">
+            <summary>
+            获取指定文件夹下的文件
+            </summary>
+            <param name="strDirectoryPath">指定文件夹的绝对路径</param>
+            <param name="searchOption"></param>
+            <param name="strKuoZhanMing">指定扩展名限制(空 表示不限制扩展名)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFilesPathAtDirectory(System.String,System.IO.SearchOption,System.String[])">
+            <summary>
+            获取指定文件夹下的文件的路径
+            </summary>
+            <param name="strDirectoryPath">指定文件夹的绝对路径</param>
+            <param name="searchOption"></param>
+            <param name="strKuoZhanMing">指定扩展名限制(空 表示不限制扩展名)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFileSystemInfoAtDirectory(System.String)">
+            <summary>获取指定路径下的第一层文件信息(包含文件和文件夹)</summary>
+            <param name="strDirectoryPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.isEmptyDirecory(System.IO.DirectoryInfo)">
+            <summary>判定指定文件夹是否为空文件夹</summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.isEmptyDirecory(System.String)">
+            <summary>判定指定文件夹是否为空文件夹</summary>
+            <param name="strDirectoryPath">文件夹路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.WriteStringToFileByFileStream(System.String,System.String,System.Action,System.Text.Encoding,System.Boolean)">
+            <summary>
+            使用FileStream将指定字符串以指定编码写入指定文件()
+            </summary>
+            <param name="strPath">指定文件路径</param>
+            <param name="data">待写入的数据</param>
+            <param name="CallBackOnFinsihWrite">写入完毕回调</param>
+            <param name="encoding">写入时采用的编码格式</param>
+            <param name="bAppend">是否是续写</param>
+        </member>
+        <member name="M:NZQLA.FileTool.WriteStringToFileByStreamWriter(System.String,System.String,System.Action,System.Text.Encoding,System.Boolean)">
+            <summary>
+            使用StreamWriter将指定字符串以指定编码写入指定文件()
+            </summary>
+            <param name="strPath">指定文件路径</param>
+            <param name="data">待写入的数据</param>
+            <param name="CallBackOnFinsihWrite">写入完毕回调</param>
+            <param name="encoding">写入时采用的编码格式</param>
+            <param name="bAppend">是否是续写</param>
+        </member>
+        <member name="M:NZQLA.FileTool.WriteBytesToFileByBinary(System.String,System.Byte[])">
+            <summary>将字节数据写入指定文件</summary>
+            <param name="outFilePath"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:NZQLA.FileTool.ReadFile(System.String,System.Text.Encoding,System.Action,System.Boolean)">
+            <summary>读取文件的字符串</summary>
+            <param name="strPath">指定文件的完整路径</param>
+            <param name="encoding">编码格式</param>
+            <param name="CallBackOnFinsihRead">读取完毕后的回调</param>
+            <param name="detectEncodingFromByteOrderMarks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.ReadFileAllLines(System.String,System.Text.Encoding,System.Action,System.Boolean)">
+            <summary>读取文件的字符串</summary>
+            <param name="strPath">指定文件的完整路径</param>
+            <param name="encoding">编码格式</param>
+            <param name="CallBackOnFinsihRead">读取完毕后的回调</param>
+            <param name="detectEncodingFromByteOrderMarks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.ReadFileLine(System.String,System.Int32,System.Text.Encoding,System.Action,System.Boolean)">
+            <summary>读取文件指定行的字符串</summary>
+            <param name="strPath">指定文件的完整路径</param>
+            <param name="Line">指定要读取的行(从1开始)</param>
+            <param name="encoding">编码格式</param>
+            <param name="CallBackOnFinsihRead">读取完毕后的回调</param>
+            <param name="detectEncodingFromByteOrderMarks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.ReadFileBytes(System.String)">
+            <summary>读取指定文件的字节</summary>
+            <param name="strPath">指定文件的路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.ReadyStream(System.String,System.IO.FileMode,System.IO.FileAccess,System.Boolean)">
+            <summary>准备一个文件流</summary>
+            <param name="strFilePath">指定路径</param>
+            <param name="FileMode">文件打开模式</param>
+            <param name="FileAccess">文件操作类型</param>
+            <param name="bAppend">在尾部添加内容/将已存在文件内容清空</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.SteamAction(System.IO.Stream,System.Action{System.IO.Stream,System.Object},System.Object)">
+            <summary>》》》基于Stream同步执行指定的Action 执行Action后会执行 flush()、close()</summary>
+            <param name="stream"></param>
+            <param name="action"></param>
+            <param name="arg"></param>
+        </member>
+        <member name="M:NZQLA.FileTool.IsErrorPath(System.String)">
+            <summary>》》》判断指定路径是否是不可用的路径(空路径、非法路径、路径起始错误......)</summary>
+            <param name="strPath">待检测的路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.EnsureDirectoryExist(System.String)">
+            <summary>
+            确保指定路径所在的文件夹存在
+            </summary>
+            <param name="strPath">指定路径</param>
+        </member>
+        <member name="M:NZQLA.FileTool.FileExist(System.String,NZQLA.Recs.RecsPathType)">
+            <summary>更安全更和谐的判定文件是否存在》》》待深入开发</summary>
+            <param name="strPath">待检查的路径</param>
+            <param name="RecsPathType">资源路径类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.RemovePathExtension(System.String)">
+            <summary>移除指定路径的扩展名称</summary>
+            <param name="strPath">指定路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.SetPathExtension(System.String,System.String)">
+            <summary>确保扩展名正确</summary>
+            <param name="strPath">待处理的路径</param>
+            <param name="strExtension">扩展名(带'.')</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFileNameWithoutExtension(System.String)">
+            <summary>获取不带扩展名的文件名称/去除指定路径的扩展名</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.GetFilePathWithoutExtension(System.String)">
+            <summary>获取不带扩展名的文件路径/去除指定路径的扩展名</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.AssetPathToFullPath(System.String)">
+            <summary>"Assets/..."→"完整路径"</summary>
+            <param name="strAssetPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.AssetPathToAssetCutPath(System.String)">
+            <summary>"Asset/Recs/..."       →      "Recs/..."</summary>
+            <param name="strAssetPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.AssetCutPathToFullPath(System.String)">
+            <summary>"(Assets下不包含'Asset/')..."      →     "完整路径"</summary>
+            <param name="strAssetCutPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.FullPathToAssetCutPath(System.String)">
+            <summary>"完整路径" → "(Assets/)Recs/..."</summary>
+            <param name="strFullPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.ToRecsourcesPath(System.String)">
+            <summary></summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.PathCutString(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>将一个字符串</summary>
+            <param name="strPath">
+            将目标字符串在指定字符串后截断
+            示例：("Assets/Resources/Aduio/Resourses/123.mp3","Resources",false,false) → "/123.mp3"
+            </param>
+            <param name="strCut">截断参考的字符串</param>
+            <param name="bCutAtCutStringHead">在截断参考字符串的头部/尾部进行截断</param>
+            <param name="bCutAtHead">在真个字符串的头部/尾部进行截断</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.PhysccalFullPathToAssetPath(System.String)">
+            <summary>完整路径→"Assets/..."</summary>
+            <param name="strFullPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.PhysccalFullPathToStreamingPath(System.String)">
+            <summary>完整路径→"(StreamingAssets/)Recs/..."</summary>
+            <param name="strFullPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.StreamingPathToPhysccalFullPath(System.String)">
+            <summary>"(StreamingAssets/)Recs/..." → 完整路径</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.FullPhysicalPathToPhysicalUrl(System.String)">
+            <summary>"D:/Peojects/.../Asset/......"  →  "file://D:/Peojects/.../Asset/......"</summary>
+            <param name="strFullPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.PhysicalUrlToFullPhysicalPath(System.String)">
+            <summary>"D:/Peojects/.../Asset/......"  →  "file://D:/Peojects/.../Asset/......"</summary>
+            <param name="strFullPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.RecsPathToPhySicalFullPath(System.String,NZQLA.Recs.RecsPathType)">
+            <summary>将指定类型的路径转换为物理完整路径</summary>
+            <param name="strPath">指定路径</param>
+            <param name="from">指定路径类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.PhySicalFullPathToRecsPath(System.String,NZQLA.Recs.RecsPathType)">
+            <summary>将指定类型的路径转换为物理完整路径</summary>
+            <param name="strPath">指定路径</param>
+            <param name="to">指定路径类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.RecsPathSwitch(System.String,NZQLA.Recs.RecsPathType,NZQLA.Recs.RecsPathType)">
+            <summary>资源路径转换</summary>
+            <param name="strPath">资源路径</param>
+            <param name="from">资源路径类型</param>
+            <param name="to">目标资源路径类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.IsPhyscisPath(System.String)">
+            <summary>判定指定路径是否是物理路径</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.IsFullPath(System.String)">
+            <summary>判定指定路径是完整路径</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.isUrlPath(System.String)">
+            <summary>判定指定路径是否是合法的Url(支持"File://","https|http|ftp|rtsp|mms")</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="F:NZQLA.FileTool.strResourcesHead">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.FileTool.strFileUrlHead">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.FileTool.isFileUrl(System.String)">
+            <summary>判定指定路径是否是合法的文件型Url"file://"</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.FileTool.IsNetPath(System.String)">
+            <summary>判定指定路径是完整路径(支持"https|http|ftp|rtsp|mms")</summary>
+            <param name="strPath"></param>
+            <returns></returns>
+        </member>
+        <member name="F:NZQLA.FileTool.urlRegex">
+            <summary>Url合法性判断</summary>
+        </member>
+        <member name="T:NZQLA.FrameStatistic">
+            <summary>
+            帧数统计
+            </summary>
+        </member>
+        <member name="F:NZQLA.FrameStatistic.Frame">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Log">
+            <summary>Log</summary>
+        </member>
+        <member name="M:NZQLA.Log.Setting(System.String)">
+            <summary>设置Log文件路径</summary>
+            <param name="strPathLog"></param>
+        </member>
+        <member name="M:NZQLA.Log.GetLogContent">
+            <summary>获取Log内容的数组</summary>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Log.LogAndSave(System.String,NZQLA.LogErrorType,System.Boolean,System.Boolean,NZQLA.LogPlatform)">
+            <summary>
+            Log
+            </summary>
+            <param name="strLog">Log内容</param>
+            <param name="ErrorType">Log错误类型</param>
+            <param name="bAddTime">是否加入时间戳</param>
+            <param name="bSave">是否缓存Log</param>
+            <param name="logPlatform">Log平台</param>
+        </member>
+        <member name="M:NZQLA.Log.SaveLogToFile(System.Boolean)">
+            <summary>
+            保存Log日志到指定文件
+            </summary>
+            <param name="bAppend"></param>
+        </member>
+        <member name="M:NZQLA.Log.LogAtUnityEditor(System.String,System.String,NZQLA.LogErrorType,System.Boolean,System.Boolean)">
+            <summary>Unity Log</summary>
+            <param name="strLog"></param>
+            <param name="color"></param>
+            <param name="ErrorType"></param>
+            <param name="bAddTime"></param>
+            <param name="bSave"></param>
+        </member>
+        <member name="M:NZQLA.Log.LogAtUnityEditorNormal(System.String,System.Boolean,System.Boolean)">
+            <summary>Unity Log [Normal]</summary>
+            <param name="strLog"></param>
+            <param name="bAddTime"></param>
+            <param name="bSave"></param>
+        </member>
+        <member name="M:NZQLA.Log.LogAtUnityEditorWarning(System.String,System.Boolean,System.Boolean)">
+            <summary>Unity Log [Warning]</summary>
+            <param name="strLog"></param>
+            <param name="bAddTime"></param>
+            <param name="bSave"></param>
+        </member>
+        <member name="M:NZQLA.Log.LogAtUnityEditorError(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>Unity Log [Warning]</summary>
+            <param name="strLog"></param>
+            <param name="needLogInvokeSource"></param>
+            <param name="bAddTime"></param>
+            <param name="bSave"></param>
+        </member>
+        <member name="T:NZQLA.LogPlatform">
+            <summary>Log平台</summary>
+        </member>
+        <member name="F:NZQLA.LogPlatform.UnityDebug">
+            <summary>使用Unity的Debug</summary>
+        </member>
+        <member name="F:NZQLA.LogPlatform.Console">
+            <summary>使用控制台的打印</summary>
+        </member>
+        <member name="T:NZQLA.LogErrorType">
+            <summary>Log错误类型</summary>
+        </member>
+        <member name="F:NZQLA.LogErrorType.Error">
+            <summary>错误</summary>
+        </member>
+        <member name="F:NZQLA.LogErrorType.Waring">
+            <summary>警告</summary>
+        </member>
+        <member name="F:NZQLA.LogErrorType.Normal">
+            <summary>正常</summary>
+        </member>
+        <member name="T:NZQLA.IDMaker">
+            <summary>
+            ID 生成器
+            </summary>
+        </member>
+        <member name="M:NZQLA.IDMaker.CreateIDByTime">
+            <summary>使用当前时间创建一个ID</summary>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.IDMaker.CreateIDByTimeAndNum(System.Int32)">
+            <summary>使用当前时间+随机数字创建一个ID</summary>
+            <param name="IDLength">数字的长度</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.NumberConvertHelper">
+            <summary>
+            数字转换处理
+            </summary>
+        </member>
+        <member name="M:NZQLA.NumberConvertHelper.TranslateTo2(System.Int32,System.Collections.Generic.List{System.Int32}@)">
+            <summary>将十进制数值转换为2进制(递归)</summary>
+            <param name="_value">指定十进制数值</param>
+            <param name="listTo2">输出的List</param>
+        </member>
+        <member name="M:NZQLA.NumberConvertHelper.Translate10ToN(System.Int32,System.Collections.Generic.List{System.Int32}@,System.Int32)">
+            <summary>将十进制数值转换为指定进制的可视化List(递归)</summary>
+            <param name="_value">指定十进制数值</param>
+            <param name="outList">输出的List</param>
+            <param name="jinzhi">指定进制数 2 、 8、16 、60......</param>
+        </member>
+        <member name="T:NZQLA.Mono.MonoActorDontDestoryOnLoad">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.AddUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.RemoveUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.AddLateUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.RemoveLateUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.AddFixedUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.RemoveFixedUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Mono.MonoActorDontDestoryOnLoad.StartMonoCoroutine(System.Collections.IEnumerator)">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.MyTool">
+            <summary>
+            工具类
+            </summary>
+        </member>
+        <member name="M:NZQLA.MyTool.IsPosOn2WayPointsDir(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            判定一个位置是否在两个路点的方向上
+            </summary>
+            <param name="vPosCur"></param>
+            <param name="vPosA"></param>
+            <param name="vPosB"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.TryMoveClampIn2Points(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Boolean@)">
+            <summary>
+            尝试在2个路点上以一定速度移动
+            </summary>
+            <param name="vPosCur"></param>
+            <param name="vPosA"></param>
+            <param name="vPosB"></param>
+            <param name="fSpeed"></param>
+            <param name="bAttach"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.SerializeObjToBinaryFile``1(``0,System.String)">
+            <summary>
+            使用二进制序列化指定的对象到指定的文件
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="obj">对象</param>
+            <param name="strDestPath">指定存储序列化数据的文件</param>
+        </member>
+        <member name="M:NZQLA.MyTool.DeserializeObjFromBinaryFile``1(System.String)">
+            <summary>
+            使用二进制反序列化指定的文件到指定类型的对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="strRecsPath">指定存储序列化数据的文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.SerializeObjToXML``1(``0,System.String,System.Type[])">
+            <summary>将对象序列化至指定文件</summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="strDestPath"></param>
+            <param name="type">补充类型 比如子类类型(解决子类序列化失败的问题)</param>
+        </member>
+        <member name="M:NZQLA.MyTool.DeserializeObjFromXML``1(System.String,System.Type[])">
+            <summary>将制定路径的XML反序列化为指定类型的对象</summary>
+            <typeparam name="T">指定类型</typeparam>
+            <param name="strRecsPath">指定路径</param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.BacthOperateOnArray``1(``0[],System.Action{``0}[])">
+            <summary>
+            批量对指定数组元素执行指定的行动
+            </summary>
+            <typeparam name="T">数组内的元素类型</typeparam>
+            <param name="arrItem">指定带操作的数组</param>
+            <param name="action">指定要执行行动的委托</param>
+        </member>
+        <member name="M:NZQLA.MyTool.BacthOperateOnList``1(System.Collections.Generic.List{``0},System.Action{``0}[])">
+            <summary>
+            批量对指定List元素执行指定的行动
+            </summary>
+            <typeparam name="T">List内的元素类型</typeparam>
+            <param name="arrItem">指定带操作的数组</param>
+            <param name="action">指定要执行行动的委托</param>
+        </member>
+        <member name="M:NZQLA.MyTool.BacthOPerateOnDic``2(System.Collections.Generic.Dictionary{``0,``1},System.Action{``1}[])">
+            <summary>
+            批量对指定词典元素执行指定的行动
+            </summary>
+            <typeparam name="K">键的类型</typeparam>
+            <typeparam name="V">值的类型</typeparam>
+            <param name="dic">词典</param>
+            <param name="action">指定要执行行动的委托</param>
+        </member>
+        <member name="M:NZQLA.MyTool.ArrayIsEmpty``1(``0[])">
+            <summary>判定一数组是否为空 </summary>
+            <typeparam name="T">数组元素类型</typeparam>
+            <param name="arr">数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.TimeFormat(System.Single,System.String)">
+            <summary>时间格式转换 秒→时分秒</summary>
+            <param name="fTime">总时间(S)</param>
+            <param name="strConnectChar">连接符</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyTool.LogOnlyAtEditor(System.String,System.String)">
+            <summary>只在Editor模式进行Log</summary>
+            <param name="strLogContent"></param>
+            <param name="strColor"></param>
+        </member>
+        <member name="M:NZQLA.MyTool.InitPartical(UnityEngine.ParticleSystem)">
+            <summary>
+            初始化粒子的陪孩子开关 
+            禁止playOnAwake
+            如果正在播放/暂停 将其停止并清理
+            </summary>
+            <param name="ps"></param>
+        </member>
+        <member name="M:NZQLA.MyTool.ParticalPlay(UnityEngine.ParticleSystem)">
+            <summary>
+            播放指定粒子
+            </summary>
+            <param name="ps"></param>
+        </member>
+        <member name="M:NZQLA.MyTool.ParticalStop(UnityEngine.ParticleSystem)">
+            <summary>
+            播放指定粒子
+            </summary>
+            <param name="ps"></param>
+        </member>
+        <member name="M:NZQLA.MyTool.SetEmmisonRateModule(UnityEngine.ParticleSystem,System.Single)">
+            <summary></summary>
+            <param name="ps"></param>
+            <param name="rate"></param>
+        </member>
+        <member name="M:NZQLA.MyTool.ParseStrToV3(System.String)">
+            <summary>将Vector3.Tostring()产生的字符串解析为Vector3</summary>
+            <param name="strV3ToString">将Vector3.Tostring()产生的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.MouseHit">
+            <summary>
+            用于检测鼠标点击3D场景的位置
+            </summary>
+        </member>
+        <member name="F:NZQLA.MouseHit.RayCamera">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.MouseHit.fDisRayMax">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.MouseHit.RayCastLayer">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.MouseHit.strAxisMouse">
+            <summary></summary>
+        </member>
+        <member name="E:NZQLA.MouseHit.OnMousePressHandler">
+            <summary></summary>
+        </member>
+        <member name="E:NZQLA.MouseHit.OnMouseHitHandler">
+            <summary></summary>
+        </member>
+        <member name="E:NZQLA.MouseHit.OnMouseHitPosHandler">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MouseHit.Setting(UnityEngine.Camera,UnityEngine.LayerMask,System.Single,System.String)">
+            <summary>配置参数</summary>
+            <param name="cam"></param>
+            <param name=""></param>
+            <param name="RayCastLayer"></param>
+            <param name="fDisRayMax"></param>
+            <param name="strAxisMouse"></param>
+        </member>
+        <member name="M:NZQLA.MouseHit.Awake">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.MyRandom">
+            <summary>
+            随机生成器
+            </summary>
+        </member>
+        <member name="P:NZQLA.MyRandom.Seed">
+            <summary>随机数种子 可以确保在同一种子下随机得到的结果一样</summary>
+        </member>
+        <member name="M:NZQLA.MyRandom.RndIn01">
+            <summary>
+            采用线性同余算法产生一个0~1之间的随机小数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.RandAround(System.Single)">
+            <summary>随即一个指定范围的Float</summary>
+            <param name="fRange"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.RandAround(System.Int32)">
+            <summary>随即一个指定范围的Float</summary>
+            <param name="Range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.Range(System.Single,System.Single)">
+            <summary>随即一个指定范围的Float</summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.Range(System.Int32,System.Int32)">
+            <summary>随即一个指定范围的int</summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.RangeUnsignFloat(System.Single)">
+            <summary>随意几个小于指定值的float(无符号)</summary>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MyRandom.RangeUnsignInt(System.Int32)">
+            <summary>随意几个小于指定值的int(无符号)</summary>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.SerialBinaryHelper">
+            <summary>
+            使用Binary进行序列化相关操作
+            </summary>
+        </member>
+        <member name="M:NZQLA.SerialBinaryHelper.DeSerialFromStream``1(System.IO.Stream)">
+            <summary>反序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="stream">待反序列化的stream</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.SerialBinaryHelper.SerialToStream``1(``0,System.IO.Stream)">
+            <summary>序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="data">待序列化的数据</param>
+            <param name="stream">待序列化的stream</param>
+        </member>
+        <member name="T:NZQLA.SerializeHelper">
+            <summary>
+            序列化工具
+            </summary>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.SerialDataToFile``1(``0,System.String,NZQLA.SerialModel)">
+            <summary>将数据序列化到指定文件</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="data">待序列化的数据</param>
+            <param name="strPath">指定序列化到哪个文件</param>
+            <param name="serialModel">指定序列化的方式</param>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.SerialDataToStream``1(``0,System.IO.Stream,NZQLA.SerialModel)">
+            <summary>将数据序列化到指定流stream</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="data">待序列化的数据</param>
+            <param name="destStream">指定序列化到哪个stream</param>
+            <param name="serialModel">指定序列化的方式</param>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.DeSerialDataFromFile``1(System.String,NZQLA.SerialModel)">
+             <summary>从指定文件将反序列化成指定类型的数据</summary>
+             <typeparam name="T">指定以何种类型反序列化</typeparam>
+            <param name="strPath">待反序列化的文件路径</param>
+             <param name="serialModel">指定使用何种反序列化的方式</param>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.DeSerialDataFromStream``1(System.IO.Stream,NZQLA.SerialModel)">
+            <summary>从指定流stream将反序列化成指定类型的数据</summary>
+            <typeparam name="T">指定以何种类型反序列化</typeparam>
+            <param name="destStream">指定待序列化的stream</param>
+            <param name="serialModel">指定使用何种反序列化的方式</param>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.DeSerialDataFromFileAuto``1(System.String)">
+            <summary>将指定文件反序列化为指定类型的 序列化方式根据文件路径决定 ".xml"(XML) ".json"(Json) ".pb"(ProtoBuf) default(Binary)</summary>
+            <typeparam name="T">指定数据的类型</typeparam>
+            <param name="strPath">指定文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.SerializeHelper.SerialDataToFileAuto``1(``0,System.String)">
+            <summary>将指定类型的数据反序列化到指定文件 序列化方式根据文件路径决定 ".xml"(XML) ".json"(Json) ".pb"(ProtoBuf) default(Binary)</summary>
+            <typeparam name="T">指定数据的类型</typeparam>
+            <param name="data">待写入的数据</param>
+            <param name="strPath">指定文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.ISerial">
+            <summary>序列化接口</summary>
+        </member>
+        <member name="M:NZQLA.ISerial.SerialToStream``1(``0,System.IO.Stream)">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="M:NZQLA.ISerial.DeSerialFromStream``1(System.IO.Stream)">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.SerialModel">
+            <summary>序列化方式</summary>
+        </member>
+        <member name="F:NZQLA.SerialModel.XML">
+            <summary>使用 XML 进行序列化 
+            不支持私有字段/属性
+            待序列化的数据类型需要支持序列化[Serializable]  [NonSerialized]可以忽略不需要序列化的数据
+            需要有无参构造 否则无法反序列化
+            </summary>
+        </member>
+        <member name="F:NZQLA.SerialModel.Binary">
+            <summary>使用 二进制 进行序列化
+            支持私有字段/属性
+            待序列化的数据类型需要支持序列化[Serializable]  [NonSerialized]可以忽略不需要序列化的数据
+            不需要有无参构造
+            </summary>
+        </member>
+        <member name="F:NZQLA.SerialModel.Json">
+            <summary>使用 Json 进行序列化</summary>
+        </member>
+        <member name="F:NZQLA.SerialModel.ProtoBuf">
+            <summary>使用 ProtoBuf 进行序列化</summary>
+        </member>
+        <member name="T:NZQLA.SerialError">
+            <summary>序列化失败编号</summary>
+        </member>
+        <member name="F:NZQLA.SerialError.UnKnown">
+            <summary>未知错误</summary>
+        </member>
+        <member name="F:NZQLA.SerialError.EmptyData">
+            <summary>空数据</summary>
+        </member>
+        <member name="F:NZQLA.SerialError.DestUnVailed">
+            <summary>目标位置不可用</summary>
+        </member>
+        <member name="F:NZQLA.SerialError.DontSupport">
+            <summary>不支持的序列化方式</summary>
+        </member>
+        <member name="T:NZQLA.SerialJsonHelper">
+            <summary>
+            Json序列化
+            </summary>
+        </member>
+        <member name="M:NZQLA.SerialJsonHelper.DeSerialFromStream``1(System.IO.Stream)">
+            <summary>反序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="stream">待反序列化的stream</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.SerialJsonHelper.SerialToStream``1(``0,System.IO.Stream)">
+            <summary>序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="data">待序列化的数据</param>
+            <param name="stream">待序列化的stream</param>
+        </member>
+        <member name="T:NZQLA.SerialXMLHelper">
+            <summary>
+            使用XML进行序列化相关操作
+            </summary>
+        </member>
+        <member name="M:NZQLA.SerialXMLHelper.DeSerialFromStream``1(System.IO.Stream)">
+            <summary>反序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="stream">待反序列化的stream</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.SerialXMLHelper.SerialToStream``1(``0,System.IO.Stream)">
+            <summary>序列化</summary>
+            <typeparam name="T">指定序列化数据的类型</typeparam>
+            <param name="data">待序列化的数据</param>
+            <param name="stream">待序列化的stream</param>
+        </member>
+        <member name="T:NZQLA.MonoSingtonAuto`1">
+            <summary>
+            MonoBehaviour单例 如果不存在将自动创建
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAuto`1.GetIns">
+            <summary>获取实例</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAuto`1.Dispose">
+            <summary>释放</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAuto`1.InitOnCreateIns(System.Object)">
+            <summary>在实例化的时候会执行的初始化方法</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAuto`1.DestorySelf">
+            <summary>释放</summary>
+        </member>
+        <member name="T:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1">
+            <summary>
+            自动生成的跨场景Unity Mono单例
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1.Dispose">
+            <summary>释放</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1.GetIns">
+            <summary>获取实例</summary>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1.Awake">
+            <summary>MonoMethod: Awake()</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1.InitOnCreateIns(System.Object)">
+            <summary>在实例化的时候会执行的初始化方法</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonAutoDontDestoryOnLoad`1.DestorySelf">
+            <summary>释放</summary>
+        </member>
+        <member name="T:NZQLA.MonoSingtonUnAuto`1">
+            <summary>
+            非自动的单例模板基类 需要手动在场景内挂载在GameObject上
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:NZQLA.MonoSingtonUnAuto`1.GetIns">
+            <summary>获取实例</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonUnAuto`1.Awake">
+            <summary>MonoMethod: Awake()</summary>
+        </member>
+        <member name="M:NZQLA.MonoSingtonUnAuto`1.CreateInsAtObj(UnityEngine.GameObject)">
+            <summary>基于</summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:NZQLA.MonoSingtonUnAuto`1.Release(System.Boolean)">
+            <summary>Release</summary>
+            <param name="destoryGameobject">是否删除GameObject</param>
+        </member>
+        <member name="T:NZQLA.SingtonAuto`1">
+            <summary>
+            类单例 如果不存在将自动创建
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:NZQLA.SingtonAuto`1.GetIns">
+            <summary>获取实例</summary>
+        </member>
+        <member name="M:NZQLA.SingtonAuto`1.Dispose">
+            <summary>释放</summary>
+        </member>
+        <member name="M:NZQLA.SingtonAuto`1.InitOnCreateIns(System.Object)">
+            <summary>在实例化的时候会执行的初始化方法</summary>
+        </member>
+        <member name="M:NZQLA.SingtonAuto`1.DestorySelf">
+            <summary>释放</summary>
+        </member>
+        <member name="T:NZQLA.UnFinishedMethodAttribute">
+            <summary>待完成的方法</summary>
+        </member>
+        <member name="T:NZQLA.MyApplication">
+            <summary>
+            用于判定Unity Application的一些状态
+            </summary>
+        </member>
+        <member name="M:NZQLA.MyApplication.IsEditorRuntime">
+            <summary>判定当前的运行环境是不是在Editor模式下</summary>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.MonoActor">
+            <summary>
+            单例、管理者
+            用于MonoBehavior集中式管理
+            将本脚本作为Awake、Start、Update、LateUpdate......的入口
+            当不想生成大量的EmptyGameObject来挂载脚本使用MonoBehaviour机制的话,可以将方法注册给本脚本
+            </summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.AddUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.RemoveUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.AddLateUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.RemoveLateUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.AddFixedUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.RemoveFixedUpdateListener(NZQLA.MonoUpdaterEvent)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.MonoActor.StartMonoCoroutine(System.Collections.IEnumerator)">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundles.AssetBundleLoadTest">
+            <summary>
+            AssetBundle加载
+            </summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.AssetBundleLoadTest.bundleLoad">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.AssetBundleLoadTest.arrRecsLoad">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleLoadTest.LoadTargetBundle(System.String)">
+            <summary>加载指定的AssetBundle</summary>
+            <param name="strPath">指定AssetBundle的路径</param>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr">
+            <summary>
+            资源加载管理
+            资源检查、下载、更新、载入
+            </summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestServer">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestLocal">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.recsList">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.dicRecs">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.isNeedDownAllFilesFromServer">
+            <summary>判定本地是否缓存有AssetBundleManifest</summary>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.Manifest">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.dicBundlesInfo">
+            <summary>(名称,hash)</summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.#ctor(UnityEngine.AssetBundleManifest)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.#ctor(System.String)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.Init(System.String)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.ManifestInfo.GetBundlesInfo">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsAssetBundleMgr.GetRecsSources">
+            <summary>
+            获取资源来源的类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundles.AssetBundleTool">
+            <summary>
+            AssetBundle工具类
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleTool.DownloadAssetBundle(System.String,System.String,System.String,System.Action{System.String},System.Action)">
+            <summary>将指定名称的AssetBundle下载到指定位置</summary>
+            <param name="strRecsPathDirectory">目标资源路径的文件夹</param>
+            <param name="strBundleName">指定需要下载的AssetBundle的名称</param>
+            <param name="strOutPathDirectory">目标输出路径的文件夹</param>
+            <param name="OnError">下载失败的回调</param>
+            <param name="onFinish">下载完毕的回调</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleTool.LoadBundlesFromAssetBundleManifest(UnityEngine.AssetBundleManifest,System.String,System.Boolean)">
+            <summary></summary>
+            <param name="man"></param>
+            <param name="strOutPath"></param>
+            <param name="bContainsDepen"></param>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleTool.ILoadAssetBundle(System.String,System.Boolean,System.Action{System.String},System.Action{UnityEngine.AssetBundle})">
+            <summary>加载指定路径的AssetBundle</summary>
+            <param name="strPath">指定路径</param>
+            <param name="bAsyc">是否采用异步加载</param>
+            <param name="OnError">加载失败回调</param>
+            <param name="OnSuccess">加载成功回调</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleTool.GetAssetsFromAssetBundle(UnityEngine.AssetBundle,System.Action{System.String})">
+            <summary></summary>
+            <param name="ab"></param>
+            <param name="OnFaild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.AssetBundleTool.ILoadAssetFromAssetBundle(UnityEngine.AssetBundle)">
+            <summary></summary>
+            <param name="ab"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundles.RecsPathCtrl">
+            <summary>
+            提供资源的根路径
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsPathCtrl.GetIns">
+            <summary>实例</summary>
+            <returns></returns>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsPathCtrl.strPathBundleRoot">
+            <summary>资源根路径</summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsPathCtrl.strPathUpdateInfoFile">
+            <summary>资源更新信息存放的文件的路径</summary>
+        </member>
+        <member name="F:NZQLA.Recs.AssetBundles.RecsPathCtrl.strPathManifest">
+            <summary>AssetBundle资源列表文件路径(相对于根路径)</summary>
+        </member>
+        <member name="P:NZQLA.Recs.AssetBundles.RecsPathCtrl.RecsRootPathLocal">
+            <summary>
+            外部资源存放的路径（AssetBundle、xml、txt）【本地缓存】
+            </summary>
+        </member>
+        <member name="P:NZQLA.Recs.AssetBundles.RecsPathCtrl.RecsRootPathServer">
+            <summary>
+            初始资源存放的位置（只读）【存放最新资源】
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsPathCtrl.GetPathUpdateInfoFile(System.Boolean)">
+            <summary>资源更新信息存放的文件的路径</summary>
+            <param name="bLocal">本地/服务器</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsPathCtrl.GetPathManifest(System.Boolean)">
+            <summary>获取AssetBundle资源列表文件路径(相对于根路径)</summary>
+            <param name="bLocal">本地/服务器</param>
+            <returns></returns>
+        </member>
+        <member name="P:NZQLA.Recs.AssetBundles.RecsPathCtrl.TargetTexturePath">
+            <summary>
+            图片存放的路径
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundles.RecsPathCtrl.ToRecsourcsPath(System.String,System.Action{System.String})">
+            <summary></summary>
+            <param name="strPath"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.AssetBundleHelper">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundleHelper.LoadAsset``1(NZQLA.Recs.RecsLoadInfo,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="LoadInfo"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundleHelper.LoadAsset``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundleHelper.LoadAssets``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.AssetBundleHelper.ILoadAssetBundle``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary>使用协程加载指定路径的AssetBundle</summary>
+            <typeparam name="AssetBundle"></typeparam>
+            <param name="strPath">AssetBundle文件路径</param>
+            <param name="OnLoad">加载完成的回调</param>
+            <param name="OnFail">加载失败的回调</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.IRecsLoader">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.IRecsLoader.LoadAsset``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary>加载指定类型的资源</summary>
+            <typeparam name="T">指定资源的类型</typeparam>
+            <param name="strPath">路径</param>
+            <param name="OnLoad">加载成功的回调</param>
+            <param name="OnFail">加载失败的回调</param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.IRecsLoader.LoadAssets``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.IRecsLoader.LoadAsset``1(NZQLA.Recs.RecsLoadInfo,System.Action{System.Object},System.Action{System.Object})">
+            <summary>使用指定规则记载资源</summary>
+            <typeparam name="T">资源类型</typeparam>
+            <param name="LoadInfo">加载信息</param>
+            <param name="OnLoad">加载成功回调</param>
+            <param name="OnFail">加载失败回调</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.RecsLoadInfo">
+            <summary>资源加载信息</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsLoadInfo.RecsPathType">
+            <summary>路径类型</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsLoadInfo.RecsFromType">
+            <summary>路径来源</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsLoadInfo.strPath">
+            <summary>路径</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsLoadInfo.isAsync">
+            <summary>是否使用异步</summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfo.#ctor">
+            <summary>空构造</summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfo.#ctor(System.String,NZQLA.Recs.RecsPathType,NZQLA.Recs.RecsFromType,System.Boolean)">
+            <summary>完整构造</summary>
+            <param name="strPath"></param>
+            <param name="RecsPathType"></param>
+            <param name="RecsFromType"></param>
+            <param name="isAsync"></param>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfo.ToString">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsLoadInfoResources">
+            <summary>Resources资源加载信息</summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfoResources.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfoResources.#ctor(System.String,NZQLA.Recs.RecsPathType,System.Boolean)">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsLoadInfoAssetBundle">
+            <summary>AssetBundle资源加载信息</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsLoadInfoAssetBundle.strRecsPath">
+            <summary>资源在Bundle下的路径</summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfoAssetBundle.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfoAssetBundle.#ctor(System.String,System.String,NZQLA.Recs.RecsPathType,System.Boolean)">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoadInfoAssetBundle.ToString">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsLoader">
+            <summary>
+            统一的资源加载
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoader.LoadRecs``1(System.String,NZQLA.Recs.RecsPathType,System.Action{System.String},System.Action{UnityEngine.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="pathType"></param>
+            <param name="OnError"></param>
+            <param name="OnSuccess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.RecsLoader.LoadRecs``1(NZQLA.Recs.RecsLoadInfo,System.Action{System.Object},System.Action{System.Object})">
+            <summary>加载指定的资源</summary>
+            <typeparam name="T"></typeparam>
+            <param name="LoadInfo">加载信息</param>
+            <param name="OnSuccess">加载成功的回调</param>
+            <param name="OnFail">加载失败的回调</param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.Recs.RecsSource">
+            <summary>资源来源</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsSource.FromRecsources">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsSource.FormAssetBundleServer">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsSource.FormAssetBundleLocal">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsFromType">
+            <summary>资源类型</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsFromType.UnKnown">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsFromType.Recsources">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsFromType.AssetBundle">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsFromType.File">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsPathType">
+            <summary>资源路径类型</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.None">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.PhysicalFullPath">
+            <summary>物理完整路径"D:/Recs/..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.AssetPath">
+            <summary>"Asset/Recs/abc/ad/..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.AssetCutPath">
+            <summary>"Recs/abc/ad/..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.ResourcesPath">
+            <summary>"[Resources]下没有后缀的路径"</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.StreamingPath">
+            <summary>"StreamingAssets/..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.NetUrl">
+            <summary>"www.13.123.4354.2354.Recs/dasd..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.PhysicalUrl">
+            <summary>物理完整路径"file://D:/Recs/..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.RecsPathType.Url">
+            <summary>"file://D:/Recs/..."或"www.13.123.4354.2354.Recs/dasd..."</summary>
+        </member>
+        <member name="T:NZQLA.Recs.UrlType">
+            <summary>Url类型</summary>
+        </member>
+        <member name="F:NZQLA.Recs.UrlType.NetUrl">
+            <summary>"www.13.123.4354.2354.Recs/dasd..."</summary>
+        </member>
+        <member name="F:NZQLA.Recs.UrlType.PhysicalUrl">
+            <summary>物理完整路径"file://D:/Recs/..."</summary>
+        </member>
+        <member name="T:NZQLA.Recs.RecsourcesHelper">
+            <summary>
+            使用Resources加载资源
+            </summary>
+        </member>
+        <member name="M:NZQLA.Recs.RecsourcesHelper.LoadAsset``1(NZQLA.Recs.RecsLoadInfo,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="LoadInfo"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.RecsourcesHelper.LoadAsset``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NZQLA.Recs.RecsourcesHelper.LoadAssets``1(System.String,System.Action{System.Object},System.Action{System.Object})">
+            <summary></summary>
+            <typeparam name="T"></typeparam>
+            <param name="strPath"></param>
+            <param name="OnLoad"></param>
+            <param name="OnFail"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NZQLA.LoadRecsUI">
+            <summary>
+            加载界面UI面板
+            </summary>
+        </member>
+        <member name="F:NZQLA.LoadRecsUI.TittleUI">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.LoadRecsUI.ProcessUI">
+            <summary></summary>
+        </member>
+        <member name="F:NZQLA.LoadRecsUI.objPanel">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.Awake">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.SetTittle(System.String)">
+            <summary>设置标题</summary>
+            <param name="strTittle"></param>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.SetProcess(System.Single)">
+            <summary>设置进度</summary>
+            <param name="fProcess"></param>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.ShowOrHide(System.Boolean)">
+            <summary>显隐控制</summary>
+            <param name="bShow">显示(true)</param>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.InitAndShow(System.String,System.Boolean,System.Single)">
+            <summary>配置并显示</summary>
+            <param name="strTittle">指定标题</param>
+            <param name="bShowProcess">是否需要进度条</param>
+            <param name="fProcess"></param>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.ShowProcessInit(System.String)">
+            <summary>初始化标题、进度 并显示进度条</summary>
+            <param name="strTittle">指定标题</param>
+        </member>
+        <member name="M:NZQLA.LoadRecsUI.ShowOrHideProcess(System.Boolean)">
+            <summary>显隐控制(进度)</summary>
+            <param name="bShow">显示(true)</param>
+        </member>
+        <member name="T:NZQLA.IEnumtorHelper">
+            <summary>
+            自己实现的协程
+            </summary>
+        </member>
+        <member name="M:NZQLA.IEnumtorHelper.MoveNext(System.Collections.IEnumerator)">
+            <summary></summary>
+        </member>
+        <member name="T:NZQLA.UI.UIHelper">
+            <summary></summary>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.SetTextContentUGUI(UnityEngine.UI.Text,System.String)">
+            <summary>设置UGUI Text 的文本内容 会预判组件是否为空</summary>
+            <param name="UIText">UGUI Text</param>
+            <param name="Content">文本内容</param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.SetContent(UnityEngine.UI.Text,System.String)">
+            <summary>设置UGUI Text 的文本内容 会预判组件是否为空</summary>
+            <param name="UIText"></param>
+            <param name="Content"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RigisterOnClick(UnityEngine.UI.Button,UnityEngine.Events.UnityAction)">
+            <summary>注册事件</summary>
+            <param name="self"></param>
+            <param name="onClick"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RemoveOnClick(UnityEngine.UI.Button,UnityEngine.Events.UnityAction)">
+            <summary>移除事件</summary>
+            <param name="self"></param>
+            <param name="onClick"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RigisterOnEndEdit(UnityEngine.UI.InputField,UnityEngine.Events.UnityAction{System.String})">
+            <summary>注册事件</summary>
+            <param name="self"></param>
+            <param name="onEndEdit"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RemoveOnEndEdit(UnityEngine.UI.InputField,UnityEngine.Events.UnityAction{System.String})">
+            <summary>移除事件</summary>
+            <param name="self"></param>
+            <param name="onEndEdit"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RigisterOnValueChanged(UnityEngine.UI.Toggle,UnityEngine.Events.UnityAction{System.Boolean})">
+            <summary>注册事件</summary>
+            <param name="self"></param>
+            <param name="onEndEdit"></param>
+        </member>
+        <member name="M:NZQLA.UI.UIHelper.RemoveOnValueChanged(UnityEngine.UI.Toggle,UnityEngine.Events.UnityAction{System.Boolean})">
+            <summary>移除事件</summary>
+            <param name="self"></param>
+            <param name="onValueChanged"></param>
+        </member>
+        <member name="T:DataWithTimeStorage`1">
+            <summary>
+            用于管理带有时间戳的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="E:DataWithTimeStorage`1.FinishHandler">
+            <summary>完成时间回调</summary>
+        </member>
+        <member name="M:DataWithTimeStorage`1.FindData(System.DateTime)">
+            <summary>寻找指定时间的数据索引</summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DataWithTimeStorage`1.AddData(`0,System.DateTime)">
+            <summary>添加一个数据</summary>
+            <param name="item"></param>
+            <param name="time"></param>
+        </member>
+        <member name="M:DataWithTimeStorage`1.AddData(`0)">
+            <summary>添加一个数据</summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:DataWithTimeStorage`1.GetDataAtIndex(System.Int32)">
+            <summary>获取指定索引的数据</summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DataWithTimeStorage`1.GetDataAtTime(System.DateTime)">
+            <summary>获取指定时间戳的数据</summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DataWithTimeStorage`1.Sort">
+            <summary>将数据按照时间戳的方式进行排序</summary>
+        </member>
+        <member name="M:DataWithTimeStorage`1.RefreshBorder">
+            <summary>刷新边界</summary>
+        </member>
+        <member name="T:DataWithTime`1">
+            <summary>
+            拥有时间戳的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:InputHelper">
+            <summary>
+            用于监听用户的输入
+            单例脚本
+            支持订阅相关输入消息
+            </summary>
+        </member>
+        <member name="T:EditScriptableAttribute">
+            <summary>
+            Display a ScriptableObject field with an inline editor
+            </summary>
+        </member>
+        <member name="T:ReorderableAttribute">
+            <summary>
+            Display a List/Array as a sortable list in the inspector
+            </summary>
+        </member>
+        <member name="M:ReorderableAttribute.#ctor">
+            <summary>
+            Display a List/Array as a sortable list in the inspector
+            </summary>
+        </member>
+        <member name="M:ReorderableAttribute.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Display a List/Array as a sortable list in the inspector
+            </summary>
+            <param name="headerString">Customize the element name in the inspector</param>
+            <param name="isZeroIndex">If false, start element list count from 1</param>
+            <param name="isSingleLine">Try to fit the array elements in a single line</param>
+        </member>
+        <member name="T:MsgUICtrl">
+            <summary>
+            消息提示UI面板控制
+            通过配置显示一个消息面板
+            配置选项(标题、内容、关闭选项)
+            </summary>
+        </member>
+        <member name="F:MsgUICtrl.objPanel">
+            <summary></summary>
+        </member>
+        <member name="F:MsgUICtrl.TittleUI">
+            <summary></summary>
+        </member>
+        <member name="F:MsgUICtrl.ContentUI">
+            <summary></summary>
+        </member>
+        <member name="F:MsgUICtrl.BtnOK">
+            <summary></summary>
+        </member>
+        <member name="F:MsgUICtrl.bNeedCloseDelay">
+            <summary></summary>
+        </member>
+        <member name="F:MsgUICtrl.fTimeDelayWaitClose">
+            <summary></summary>
+        </member>
+        <member name="E:MsgUICtrl.BtnOKHandler">
+            <summary></summary>
+        </member>
+        <member name="M:MsgUICtrl.Awake">
+            <summary></summary>
+        </member>
+        <member name="M:MsgUICtrl.ShowOrHide(System.Boolean)">
+            <summary>显隐控制</summary>
+            <param name="bShow"></param>
+        </member>
+        <member name="M:MsgUICtrl.ShowMsg(System.String,System.String,System.Action,System.Boolean,System.Single)">
+            <summary>外调 初始化并且显示</summary>
+            <param name="strTittle">标题</param>
+            <param name="strContent">内容</param>
+            <param name="btnOK">按钮回调</param>
+            <param name="bNeedCloseDelay">是否需要延时关闭</param>
+            <param name="fTimeDelayWaitClose">延时时间</param>
+        </member>
+        <member name="M:MsgUICtrl.SimluateClickbtnOK">
+            <summary>模拟点击按钮[OK]</summary>
+        </member>
+        <member name="T:SinGameObject">
+            <summary>
+            测试使用Sin()控制对象的Scale
+            </summary>
+        </member>
+        <member name="F:SinGameObject.fSpeed">
+            <summary></summary>
+        </member>
+        <member name="F:SinGameObject.fTime">
+            <summary></summary>
+        </member>
+        <member name="T:TestLoadRecs">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.strPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.asset">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.assets">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.pathType">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.infoLoad">
+            <summary></summary>
+        </member>
+        <member name="F:TestLoadRecs.assetLoadByInfo">
+            <summary></summary>
+        </member>
+        <member name="M:TestLoadRecs.LoadRecsByIndo">
+            <summary></summary>
+        </member>
+        <member name="T:TestUrl">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.url">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strFullPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strFullPhysicalPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strAssetPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strAssetCutPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strRecsoursePath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strRecsPath">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.recs">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strSubstring">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strIndexOf">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strGetFilePathWithoutExtension">
+            <summary></summary>
+        </member>
+        <member name="F:TestUrl.strToRecsourcesPath">
+            <summary></summary>
+        </member>
+    </members>
+</doc>

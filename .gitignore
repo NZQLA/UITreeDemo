@@ -1,0 +1,15 @@
+﻿#忽略Unity的比必要文件夹
+/Library/
+**Temp/
+
+
+
+#忽略C#生成的各种项目文件
+*.sln
+*.csproj
+*.user
+/.vs/
+
+
+#忽略测试文件
+**Test/

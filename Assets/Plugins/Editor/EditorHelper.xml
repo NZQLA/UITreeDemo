@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EditorHelper</name>
+    </assembly>
+    <members>
+        <member name="T:AssetBundleBuildCtrl">
+            <summary>
+            AssetBundle创建管理器
+            默认文件以当前文件路径的包含关系打包
+            </summary>
+        </member>
+        <member name="M:AssetBundleBuildCtrl.CreateAssetBundle(System.String,UnityEditor.BuildAssetBundleOptions,UnityEditor.BuildTarget)">
+            <summary>将当前项目中所有的Bundle打包到指定文件夹</summary>
+        </member>
+        <member name="M:AssetBundleBuildCtrl.SetTargetDirectoryBundleName(System.String,System.Boolean)">
+            <summary>设置指定文件夹下资源的打包名称</summary>
+            <param name="strRecsDirectoryPath">资源主路径(绝对路径)</param>
+            <param name="ContainDependences">资源包中是否包含依赖资源的标志 True分离打包 False整体打包</param>
+        </member>
+        <member name="M:AssetBundleBuildCtrl.SetTargetFileBundleName(System.String,System.Boolean)">
+            <summary>设置指定文件的Bundle名称</summary>
+            <param name="strRecsFullFilePath">指定文件路径(完整路径)</param>
+            <param name="ContainDependences"></param>
+        </member>
+        <member name="M:AssetBundleBuildCtrl.SetTargetFilesBundleNames(System.String[],System.Boolean)">
+            <summary>设置指定文件的Bundle名称</summary>
+            <param name="strRecsFullFilePath">指定文件路径(完整路径)</param>
+            <param name="ContainDependences"></param>
+        </member>
+        <member name="M:AssetBundleBuildCtrl.SetTargetAssetBundleNames(UnityEngine.Object[],System.Boolean)">
+            <summary>设置指定资源的Bundle名称</summary>
+            <param name="arrAssets">指定文件路径(完整路径)</param>
+            <param name="ContainDependences"></param>
+        </member>
+        <member name="T:EditorAssetBundleBuildSetting">
+            <summary>
+            AssetBundle打包设置
+            资源选择方式： 使用鼠标点选需要打包的资源(这样更灵活、文件(夹)数量不限)
+            打包设置：在对应的Window进行各种配置(压缩模式、目标平台、依赖包含、输出路径等)
+            </summary>
+        </member>
+        <member name="F:EditorAssetBundleBuildSetting.buildSetting">
+            <summary></summary>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.ShowSetPathWindow">
+            <summary></summary>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.SetPath(System.String)">
+            <summary>设置输出路径的根目录(Asset下)</summary>
+            <param name="strPath"></param>
+        </member>
+        <member name="T:EditorAssetBundleBuildSetting.AssetBundleBuildSetting">
+            <summary>AssetBundle打包设置数据对象</summary>
+        </member>
+        <member name="F:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.strPathBuildUnderAsset">
+            <summary>输出路径的根目录(Asset下)</summary>
+        </member>
+        <member name="F:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.BuildAssetBundleOptions">
+            <summary>压缩类型</summary>
+        </member>
+        <member name="F:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.BuildTarget">
+            <summary>打包平台</summary>
+        </member>
+        <member name="F:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.ContainDependences">
+            <summary>是否包含依赖关系</summary>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.AssetBundleBuildSetting.ToString">
+            <summary></summary>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.SerializeObjToXML``1(``0,System.String,System.Type[])">
+            <summary>将对象序列化至指定文件</summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="strDestPath"></param>
+            <param name="type">补充类型 比如子类类型(解决子类序列化失败的问题)</param>
+        </member>
+        <member name="M:EditorAssetBundleBuildSetting.DeserializeObjFromXML``1(System.String,System.Type[])">
+            <summary>将制定路径的XML反序列化为指定类型的对象</summary>
+            <typeparam name="T">指定类型</typeparam>
+            <param name="strRecsPath">指定路径</param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EditorAssetBundleLoad">
+            <summary></summary>
+        </member>
+        <member name="M:EditorAssetBundleLoad.SelectBundleFile">
+            <summary></summary>
+        </member>
+        <member name="T:EditorSelectionOperate">
+            <summary></summary>
+        </member>
+        <member name="E:EditorSelectionOperate.OnSelectAsset">
+            <summary></summary>
+        </member>
+        <member name="M:EditorSelectionOperate.GetSelectAssets">
+            <summary></summary>
+        </member>
+        <member name="M:EditorSelectionOperate.GetSelectAssetsDirectory">
+            <summary></summary>
+        </member>
+        <member name="T:AssetBundleBuildSettingWindow">
+            <summary>
+            AssetBundle打包配置窗口
+            </summary>
+        </member>
+        <member name="M:AssetBundleBuildSettingWindow.ShowSelf">
+            <summary></summary>
+        </member>
+        <member name="T:LoadAssetBundleWindow">
+            <summary>
+            加载AssetBundle的窗口
+            </summary>
+        </member>
+        <member name="F:LoadAssetBundleWindow.strBundleFile">
+            <summary></summary>
+        </member>
+        <member name="M:LoadAssetBundleWindow.ShowSelf">
+            <summary></summary>
+        </member>
+        <member name="T:MsgWindow">
+            <summary></summary>
+        </member>
+        <member name="M:MsgWindow.ShowSelf``1(``0)">
+            <summary></summary>
+        </member>
+        <member name="T:WindowType">
+            <summary></summary>
+        </member>
+        <member name="F:WindowType.Common">
+            <summary></summary>
+        </member>
+        <member name="F:WindowType.Utility">
+            <summary></summary>
+        </member>
+        <member name="F:WindowType.Popup">
+            <summary></summary>
+        </member>
+        <member name="F:WindowType.Aux">
+            <summary></summary>
+        </member>
+        <member name="T:MsgWindowData">
+            <summary></summary>
+        </member>
+        <member name="T:WindowMsgData">
+            <summary></summary>
+        </member>
+        <member name="F:WindowMsgData.strWindowTittle">
+            <summary></summary>
+        </member>
+        <member name="F:WindowMsgData.strMsgContent">
+            <summary></summary>
+        </member>
+        <member name="F:WindowMsgData.windowType">
+            <summary></summary>
+        </member>
+        <member name="M:WindowMsgData.#ctor">
+            <summary></summary>
+        </member>
+        <member name="M:WindowMsgData.#ctor(System.String,System.String,WindowType)">
+            <summary></summary>
+            <param name="strWindowTittle"></param>
+            <param name="strMsgContent"></param>
+            <param name="windowType"></param>
+        </member>
+        <member name="T:NZQLA.EditorHelper.EditorTool_CreateNecessaryDirecory">
+            <summary>创建项目开发基本需要的文件夹</summary>
+        </member>
+    </members>
+</doc>
